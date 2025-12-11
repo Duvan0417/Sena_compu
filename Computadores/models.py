@@ -24,12 +24,16 @@ class Computador(models.Model):
         return f"{self.marca} {self.modelo} - {self.serial_number}"
     
 class Compu_dañados(models.Model):
-    gravedad_estado = [('Baja','Baja'),
-                       ('Media','Media'),
-                       ('Alta','Alta')]
-    estado_inicial = [('Pendiente', 'Pendiente'),
-                      ('En proceso', 'En proceso'),
-                      ('Reparado', 'Reparado')]
+    gravedad_estado = [
+        ('Baja','Baja'),
+        ('Media','Media'),
+        ('Alta','Alta')
+    ]
+    estado_inicial = [
+        ('Pendiente', 'Pendiente'),
+        ('En proceso', 'En proceso'),
+        ('Reparado', 'Reparado')
+    ]
     descripcion_daño = models.TextField(max_length=500)
     fecha_reporte = models.DateField(auto_now_add=True)
     gravedad_daño = models.CharField(max_length=50, choices=gravedad_estado, default='Media')
