@@ -14,14 +14,26 @@ class Computador(models.Model):
     marca = models.CharField(max_length=100)
     estado = models.CharField(max_length=100, choices=Estados, default='Disponible')
     modelo = models.CharField(max_length=100)
+    procesador = models.CharField(max_length=100)
+    ram = models.CharField(max_length=70)
+    almacenamiento = models.CharField(max_length=70)
+    observaciones = models.TextField(blank=True, null=True)
     fecha_adquisicion = models.DateField()
 
     def __str__(self):
         return f"{self.marca} {self.modelo} - {self.serial_number}"
     
 class Compu_dañados(models.Model):
+    gravedad_estado = [('Baja','Baja'),
+                       ('Media','Media'),
+                       ('Alta','Alta')]
+    estado_inicial = [('Pendiente', 'Pendiente'),
+                      ('En proceso', 'En proceso'),
+                      ('Reparado', 'Reparado')]
     descripcion_daño = models.TextField(max_length=500)
     fecha_reporte = models.DateField(auto_now_add=True)
+    gravedad_daño = models.CharField(max_length=50, choices=gravedad_estado, default='Media')
+    estado_inicial = models.CharField(max_length=100, choices=estado_inicial, default='Pendiente')
     ID_computador = models.OneToOneField(Computador, on_delete=models.CASCADE)
 
 class Mantenimiento(models.Model):
